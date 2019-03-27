@@ -4,8 +4,6 @@
  9F - 抽獎轉盤
  <a href="https://huiyuliz.github.io/vue-lucky-wheel/" target="_blank">Demo</a>。
 
- 使用 Vue.js 進行破關。
- 
  ## 特定技術 遊戲規則
  【特定技術】2017 遊戲輪盤規則，樣式請參考 <a href="https://xd.adobe.com/spec/e7136641-75fd-4359-5960-f092bdfaa633-9122/screen/f8b361e2-e81f-45a1-8465-e21963362b05/before/" target="_blank">Adobe XD 設計稿</a>
 
@@ -97,7 +95,7 @@
  ```
   ## 運用SCSS 中的 @for 算出各個角度
   
-  當角度算到一半的時候，突然想到還有 SCSS 的 for 迴圈可以用。
+  用 CSS 只能一個一個計算角度，邊按計算機邊算角度到一半的時候，想到可以用 SCSS 的 for 迴圈處理。
 
 ```scss
 //$n:輪盤數量；$deg每個項目角度
@@ -131,10 +129,13 @@ $n: 6;
           transform: rotate(240deg) skewY(-30deg);
 ...          
 ```
-本來得獎背景也考慮用 for 迴圈製作，但呈現出來的是一團凌亂到處飛的 icon，於是重新照著設計圖一個一個算位置，for 迴圈改用在亂數產生微動畫，附上只有切版的<a href="https://codepen.io/liscodecode/pen/qvzrzZ" target="_blank">CodePen</a>。  
+本來得獎背景也考慮用 for 迴圈製作，但呈現出來的是一團凌亂到處飛的 icon，於是重新照著設計圖一個一個算位置，for 迴圈改用在亂數產生微動畫，附上只有切版的 <a href="https://codepen.io/liscodecode/pen/qvzrzZ" target="_blank">CodePen</a>。  
 
-  ## 如何抽獎?
-  切完版之後看著畫面開始思考如何製作抽獎，是要用什麼比對得知中獎呢?2017 年共有 6 種獎品，改用 Vue.js 計算出的角度可以得知每一份獎品均分360度後佔60°，另外分別是旋轉60°、120°、180°、240°、300°、360°，把旋轉角度新增到獎品中進行畫面綁定。    
+  ## 如何抽獎?  
+  
+ ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-FINISH.jpg)  
+ 
+  【角度計算】切完版後看著畫面開始思考，如何在畫面中找出指針旋轉的角度和獎品的關聯性，像是 2017 年共有 6 種獎品，平分360°後每一份獎品佔60°，另外旋轉角度分別是60°、120°、180°、240°、300°、360°，將原本試排角度用的 SCSS 移除，把旋轉角度資料新增到原本的獎品項目中，使用 Vue.js 將旋轉角度資料綁訂至畫面。    
   
   原本的獎品格式 :
   ```json
@@ -154,9 +155,54 @@ $n: 6;
     "count": 5,
     "rotate":60
   }]
+  ```  
+  【抽獎方式】以 2017 年的 6 項獎品為例，將索引數產生獎品陣列編號 numbers=>[0,1,2,3,4,5]，隨機的 index 設為抽中獎品的索引數，抽中的獎項會新增 active 的 class，獎品抽完的索引數將不再出現，直到全數抽完，重新 RESET。
+  
+  ```vue.js
+      ...
+      //等指針旋轉過後才顯示中獎
+      setTimeout(() => {
+        vm.$refs.item[vm.index].classList.value = "item active"
+      }, vm.duration);
+      ... 
+      let prize = vm.prizes[vm.index]
+      vm.prize_name = prize.name //背景得獎獎品名稱
+      vm.prize_icon = prize.icon //背景得獎獎品icon
+      ...
   ```
+  【指針旋轉】從陣列編號 numbers 隨機取出數字進行運算旋轉角度，指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
+  ```vue.js
+      ...
+      let n = vm.numbers[Math.floor(Math.random() * vm.numbers.length)]
+      vm.index = n
+      console.log('1.剩餘牌號', vm.numbers)
+
+      // 預先旋轉四圈
+      let circle = 4
+      let degree
+      if (vm.current_year === 2017) {
+        degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360 - vm.each_deg / 2
+      } else {
+        degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360 - vm.each_deg
+      }
+
+      // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
+      vm.start_deg = degree
+      vm.rotate_deg = `rotate(${degree + vm.each_deg / 2}deg)`
+      vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
+      ...
+  ```
+           
+ 
+
+
+  ## 參考資料 
+  <a href="https://github.com/landluck/lucky_wheel" target="_blank">vue js 幸運大轉盤</a>。  
   
-  
+  <a href="https://pjchender.blogspot.com/2017/05/vue-vue-reactivity.html" target="_blank">[那些關於 Vue 的小細節 ] 為什麼畫面沒有隨資料更新 - Vue 響應式原理（Reactivity）
+</a>。  
+
+  <a href="https://www.bilibili.com/video/av18751303/?spm_id_from=333.788.videocard.6" target="_blank">商城必備技術之轉盤抽獎系統(程式90:00開始，使用jQuery)</a>。
 
 
 
