@@ -1,0 +1,461 @@
+$primary-color: #343baa;
+$primary-color-dark: #1f1172;
+$secondary-color: #f0beff;
+$access-color: #ff00ba;
+$duration: 3s;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Roboto Condensed", sans-serif;
+  position: relative;
+  background-color: #5858b9;
+  user-select: none;
+}
+
+.status-container {
+  position: relative;
+  left: 100px;
+}
+
+.toggle {
+  display: flex;
+  background-image: url("../svg/toggle.svg");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 120px;
+  position: absolute;
+  left: calc;
+  top: -3%;
+  transition: all 0.3s ease-in;
+  filter: drop-shadow(-3px 5px 0px $primary-color);
+  cursor: pointer;
+
+  &:hover {
+    transform: rotate(360deg) scale(0.8);
+  }
+}
+
+.game-status {
+  position: absolute;
+  left: 2%;
+  top: 4%;
+  font-size: 2rem;
+  color: $secondary-color;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  margin: 0 auto;
+  flex-direction: column-reverse;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 250px;
+  height: 600px;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.times {
+  font-size: 2.5rem;
+  line-height: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px 0px;
+  position: relative;
+  color: $primary-color-dark;
+
+  &::after {
+    position: absolute;
+    content: "x";
+    font-size: 2.3rem;
+    font-weight: normal;
+    left: 150px;
+    top: 3px;
+    color: $secondary-color;
+  }
+
+  > span {
+    text-align: right;
+    color: $primary-color-dark;
+    margin-left: 40px;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.btn {
+  cursor: pointer;
+  font-family: "Roboto Condensed", sans-serif;
+  width: 100px;
+  padding: 5px 10px;
+  margin: 10px 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s;
+
+  &.btn-primary {
+    border: 3px solid #1f1172;
+    color: $secondary-color;
+    background-color: $primary-color;
+  }
+
+  &.active {
+    border: 3px solid $access-color;
+    color: $access-color;
+    background-color: $primary-color-dark;
+  }
+
+  &.btn-secondary {
+    border: 3px solid #1f1172;
+    color: $primary-color;
+    background-color: $secondary-color;
+
+    &:hover {
+      border: 3px solid $secondary-color;
+      color: $secondary-color;
+      background-color: $primary-color-dark;
+    }
+  }
+}
+
+.lucky-wheel {
+  display: flex;
+  width: 550px;
+  height: 550px;
+  border-radius: 550px;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+
+  &::after {
+    content: "";
+    width: 540px;
+    height: 549px;
+    background-image: url("../svg/wheel-outside.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+  }
+
+  .container {
+    display: block;
+    width: 520px;
+    height: 520px;
+    border-radius: 520px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .container-twenty {
+    display: block;
+    width: 520px;
+    height: 520px;
+    border-radius: 520px;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+.pointer-container {
+  display: flex;
+  width: 128px;
+  height: 208px;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  position: absolute;
+  color: $access-color;
+  font-size: 2rem;
+
+  &::after {
+    display: block;
+    content: "PRESS";
+    width: 120px;
+    height: 120px;
+    border-radius: 120px;
+    background-color: #1f1172;
+    line-height: 120px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .pointer {
+    width: 128px;
+    height: 208px;
+    display: block;
+    background-image: url("../svg/hand.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 39.7px;
+    transform-origin: 64px 144px;
+    cursor: pointer;
+  }
+}
+
+.item {
+  position: absolute;
+  display: flex;
+  width: 50%;
+  height: 50%;
+  border: 1px solid #1f1172;
+  top: 0;
+  right: 0;
+  transform-origin: 0% 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-content {
+  display: flex;
+  width: 100px;
+  align-items: center;
+  flex-direction: column;
+  font-size: 2rem;
+  font-weight: bold;
+  transform-origin: center center;
+  // 16輪盤
+  transform: skewY(30deg) rotate(30deg) translate(-95px, 62px);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  &.item-content-large {
+    // 20輪盤
+    transform: skewY(72deg) rotate(9deg) translate(-22px, -10px);
+    position: absolute;
+    left: 0;
+    top: 200px;
+  }
+
+  .count {
+    position: absolute;
+    left: 28px;
+    top: 112px;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 45px;
+    line-height: 25px;
+    border-radius: 30px;
+    display: block;
+  }
+
+  .count-large {
+    left: 39px;
+    top: 40px;
+    font-size: 1rem;
+    width: 25px;
+    line-height: 25px;
+    border-radius: 25px;
+  }
+  > i {
+    font-size: 4rem;
+  }
+}
+
+.item:nth-child(odd) {
+  background-color: $primary-color;
+
+  .item-content {
+    color: $secondary-color;
+  }
+
+  .count {
+    color: $primary-color;
+    background-color: $secondary-color;
+  }
+}
+
+.item:nth-child(even) {
+  background-color: $secondary-color;
+
+  .item-content {
+    color: $primary-color;
+  }
+
+  .count {
+    color: $secondary-color;
+    background-color: $primary-color;
+  }
+}
+
+.item {
+  &.active {
+    background-color: $access-color;
+    transition: 0.2s ease-in;
+
+    .item-content {
+      color: white;
+      transition: 0.2s ease-in;
+    }
+  }
+}
+
+.prize {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 237px;
+  background-color: $primary-color;
+  overflow: hidden;
+  z-index: -5;
+
+  .prize-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .prize-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25%;
+    height: 157px;
+    font-size: 72px;
+    color: white;
+    font-weight: bold;
+    padding-left: 11%;
+    z-index: 999;
+  }
+
+  .prize-title:nth-child(2) {
+    width: 26%;
+    padding-left: 0px;
+    font-size: 32px;
+  }
+
+  .prize-item {
+    font-size: 72px;
+    color: $access-color;
+    text-decoration: underline;
+  }
+}
+
+.prize-background {
+  width: 1280px;
+  height: 237px;
+  position: absolute;
+
+  i {
+    font-size: 4rem;
+    color: #22299b;
+    position: absolute;
+  }
+
+  i:nth-child(1) {
+    bottom: 30px;
+    left: -40px;
+    transform: rotate(0deg);
+  }
+
+  i:nth-child(2) {
+    top: 40px;
+    left: 30px;
+    transform: rotate(20deg);
+  }
+
+  i:nth-child(3) {
+    bottom: -40px;
+    left: 130px;
+    transform: rotate(-20deg);
+  }
+
+  i:nth-child(4) {
+    top: -25px;
+    left: 270px;
+    transform: rotate(-30deg);
+  }
+
+  i:nth-child(5) {
+    bottom: 20px;
+    left: 340px;
+    transform: rotate(0deg);
+  }
+
+  i:nth-child(6) {
+    top: -20px;
+    right: 300px;
+    transform: rotate(0deg);
+  }
+
+  i:nth-child(7) {
+    bottom: -35px;
+    right: 260px;
+    transform: rotate(40deg);
+  }
+
+  i:nth-child(8) {
+    bottom: 35px;
+    right: 50px;
+    transform: rotate(-20deg);
+  }
+
+  i:nth-child(9) {
+    top: 10px;
+    right: -25px;
+    transform: rotate(20deg);
+  }
+}
+
+@for $i from 1 through 9 {
+  $size: random(100) + 100;
+
+  .prize-background i:nth-child(odd) {
+    animation: move 3s alternate infinite ease-in-out;
+    animation-delay: $i * 0.2s;
+  }
+
+  .prize-background i:nth-child(even) {
+    animation: move 2s alternate-reverse infinite ease-in-out;
+  }
+}
+
+@keyframes move {
+  @for $i from 1 through 9 {
+    #{($i*10)}% {
+      transform: rotate((random(10) * 1deg)) scale(random(1) * 0.8);
+    }
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all 1s ease;
+  transition-delay: ($duration - 1) s;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}

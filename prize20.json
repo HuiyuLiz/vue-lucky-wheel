@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Wish",
+    "icon": "cake",
+    "count": 5
+  },
+  {
+    "name": "Anything",
+    "icon": "stars",
+    "count": 5
+  },
+  {
+    "name": "Child",
+    "icon": "child_care",
+    "count": 4
+  },
+  {
+    "name": "Flight",
+    "icon": " flight",
+    "count": 1
+  },
+  {
+    "name": "Wifi",
+    "icon": "wifi",
+    "count": 5
+  },
+  {
+    "name": "Movie",
+    "icon": "movie_filter",
+    "count": 0
+  }
+]
