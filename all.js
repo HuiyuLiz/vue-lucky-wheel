@@ -215,25 +215,32 @@ let app = new Vue({
       // 預先旋轉四圈
       let circle = 4
       let degree
-      if (vm.current_year === 2017) {
-        degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360 - vm.each_deg / 2
-      } else {
-        degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360 - vm.each_deg
-      }
+      degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360
 
       // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
       vm.start_deg = degree
-      vm.rotate_deg = `rotate(${degree + vm.each_deg / 2}deg)`
+      if (vm.current_year === 2017) {
+        vm.rotate_deg = `rotate(${degree}deg)`
+      } else {
+        vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
+      }
+
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
       vm.time_remaining--
       vm.isClicked = true
 
-      // 取當下開始角度的餘數，，與輪盤角度比對(除錯用)
+      // 取當下開始角度的餘數，與輪盤角度比對(除錯用)
       let remainder = vm.start_deg % 360
       if (remainder <= 0) {
-        vm.current_deg = remainder + 360 + vm.each_deg / 2 // 為了不產生負數，加360
+        vm.current_deg = remainder + 360  // 為了不產生負數，加360
+        if (vm.current_year === 2018) {
+          vm.current_deg = remainder + 360 - vm.each_deg / 2
+        }
       } else if (remainder > 0) {
-        vm.current_deg = remainder + vm.each_deg / 2
+        vm.current_deg = remainder
+        if (vm.current_year === 2018) {
+          vm.current_deg = remainder - vm.each_deg / 2
+        }
       }
       console.log('2.執行旋轉', degree, '指針旋轉:', 'vm.current_deg', vm.current_deg, 'vm.index', vm.index)
 
