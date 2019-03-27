@@ -135,7 +135,7 @@ $n: 6;
   
  ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-FINISH.jpg)  
  
-  【角度計算】切完版後看著畫面開始思考，如何在畫面中找出指針旋轉的角度和獎品的關聯性，像是 2017 年共有 6 種獎品，平分360°後每一份獎品佔60°，另外旋轉角度分別是60°、120°、180°、240°、300°、360°，將原本試排角度用的 SCSS 移除，把旋轉角度資料新增到原本的獎品項目中，使用 Vue.js 將旋轉角度資料綁訂至畫面。    
+  【角度計算】切完版後看著畫面開始思考，如何在畫面中找出指針旋轉的角度和獎品的關聯性，像是 2017 年共有 6 種獎品，平分360°後每一份獎品佔60°，另外旋轉角度分別是60°、120°、180°、240°、300°、360°，將原本試排角度用的 SCSS 移除，把旋轉角度資料新增到原本的獎品項目中，使用 Vue.js 將獎品資料綁訂至獎品的畫面和 CSS 屬性上。     
   
   原本的獎品格式 :
   ```json
@@ -176,19 +176,20 @@ $n: 6;
       let n = vm.numbers[Math.floor(Math.random() * vm.numbers.length)]
       vm.index = n
       console.log('1.剩餘牌號', vm.numbers)
-
+      
       // 預先旋轉四圈
       let circle = 4
       let degree
-      if (vm.current_year === 2017) {
-        degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360 - vm.each_deg / 2
-      } else {
-        degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360 - vm.each_deg
-      }
+      degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360
 
       // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
       vm.start_deg = degree
-      vm.rotate_deg = `rotate(${degree + vm.each_deg / 2}deg)`
+      if (vm.current_year === 2017) {
+        vm.rotate_deg = `rotate(${degree}deg)`
+      } else {
+        vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
+      }
+
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
       ...
   ```
