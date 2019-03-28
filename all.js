@@ -178,7 +178,6 @@ let app = new Vue({
     },
     rotateHandler(num) {
       let vm = this
-
       // 刪去沒有獎品的 index
       vm.prizes.filter((prize, index) => {
         let filterArray
@@ -208,14 +207,14 @@ let app = new Vue({
       vm.$refs.item[vm.index].classList.value = 'item'
 
       // 取出 0-6之間隨機整數
-      let n = vm.numbers[Math.floor(Math.random() * vm.numbers.length)]
-      vm.index = n
+      vm.index = vm.numbers[Math.floor(Math.random() * vm.numbers.length)]
       console.log('1.剩餘牌號', vm.numbers)
 
       // 預先旋轉四圈
       let circle = 4
       let degree
-      degree = vm.start_deg + circle * 360 + vm.prize_rotate[n] - vm.start_deg % 360
+      //degree=初始角度 + 旋轉4圈 + 獎品旋轉角度[隨機數] - 餘數
+      degree = vm.start_deg + circle * 360 + vm.prize_rotate[vm.index] - vm.start_deg % 360
 
       // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
       vm.start_deg = degree
