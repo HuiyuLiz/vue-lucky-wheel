@@ -139,7 +139,9 @@ $n: 6;
   
  ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-FINISH.jpg)  
  
-  【獎品角度用資料綁定】切完版後看著畫面開始思考，如何讓指針旋轉到哪個獎品就會顯示中獎；像是 2017 年設計稿共有 6 種獎品，平分360°後每一份獎品佔60°，另外旋轉角度分別是60°、120°、180°、240°、300°、360°，將原本試排角度用的 SCSS 移除，把旋轉角度資料使用 Vue.js 新增到原本的獎品項目中，將資料綁訂至畫面和 CSS 屬性上。     
+ 切完版後看著畫面開始思考，該如何讓指針旋轉到哪個獎品就會顯示中獎資訊呢?以 2017 年的 6 項獎品為例，將索引數產生陣列[0,1,2,3,4,5]，從陣列中隨機挑選的數字，指定為抽中獎品的 index，獎品抽完的 index 將不再出現，直到全數抽完，轉盤重新 Reset。  
+ 
+  【獎品角度】以 2017 來說，6 份獎品平分360°後每一份佔60°，旋轉角度分別是60°、120°、180°、240°、300°、360°，移除原本試算角度用的 SCSS ，把旋轉角度資料使用 Vue.js 新增到原本的獎品項目中，將資料綁訂至畫面和 CSS 屬性上。     
   
   原本的獎品格式 :
   ```json
@@ -160,10 +162,16 @@ $n: 6;
     "rotate":60
   }]
   ```  
-  【指針旋轉】以 2017 年的 6 項獎品為例，將索引數產生陣列編號 numbers : [0,1,2,3,4,5]，從 numbers 隨機取出數字進行角度運算，指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
+  HTML : 
+  
+  ```vue.js
+  <div v-for="(item,index) in prizes" :key="item.name" ref="item"
+       :style="{transform:`rotate(${item.rotate}deg) skewY(-${skewY}deg)`}" class="item">
+  ```
+  【指針角度】指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
   ```vue.js
       ...
-      // 取出 0-6之間隨機整數
+      // 取出 0-5 之間隨機整數
       vm.index = vm.numbers[Math.floor(Math.random() * vm.numbers.length)]
       console.log('1.剩餘牌號', vm.numbers)
 
@@ -180,7 +188,7 @@ $n: 6;
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
       ...
   ```  
-   【抽獎方式】從 numbers 中隨機挑選的數字命名為 index ，指定為抽中獎品的索引數，如: vm.prizes[vm.index]，抽中的獎項會新增 active 的 class，獎品抽完的索引數將不再出現，直到全數抽完，重新 R。
+   【抽獎方式】隨機挑選的 index 指定為抽中獎品的索引數，如: vm.prizes[vm.index]，抽中的獎項會新增 active 的 class。
   
   ```vue.js
       ...
@@ -190,8 +198,8 @@ $n: 6;
       }, vm.duration);
       ... 
       let prize = vm.prizes[vm.index]
-      vm.prize_name = prize.name //背景得獎名稱
-      vm.prize_icon = prize.icon //背景得獎icon
+      vm.prize_name = prize.name //背景中獎名稱
+      vm.prize_icon = prize.icon //背景中獎icon
       ...
   ```        
       
