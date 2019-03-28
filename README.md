@@ -180,7 +180,7 @@ $n: 6;
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
       ...
   ```  
-   【抽獎方式】從 numbers 中隨機挑選的數字命名為 index ，指定為抽中獎品的索引數，如: vm.prizes[vm.index]，抽中的獎項會新增 active 的 class，獎品抽完的索引數將不再出現，直到全數抽完，重新 RESET。
+   【抽獎方式】從 numbers 中隨機挑選的數字命名為 index ，指定為抽中獎品的索引數，如: vm.prizes[vm.index]，抽中的獎項會新增 active 的 class，獎品抽完的索引數將不再出現，直到全數抽完，重新 R。
   
   ```vue.js
       ...
