@@ -162,11 +162,12 @@ $n: 6;
     "rotate":60
   }]
   ```  
-  HTML : 
+  綁定資料 : 
   
-  ```vue.js
+  ```html
   <div v-for="(item,index) in prizes" :key="item.name" ref="item"
        :style="{transform:`rotate(${item.rotate}deg) skewY(-${skewY}deg)`}" class="item">
+   ...
   ```
   【指針角度】指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
   ```vue.js
