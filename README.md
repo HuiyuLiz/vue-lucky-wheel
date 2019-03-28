@@ -29,7 +29,7 @@
  
  ## 預先練習 - 使用 CSS 畫出扇形 
   ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-CSS.jpg)  
- 畫出扇形的方式有很多種，因為上個 Side Project 才剛用過 Canvas ，所以這次想挑戰用 CSS 畫畫看，找了一些圓餅圖之類的關鍵字，剛好搜尋到了這篇，<a href="https://blog.csdn.net/a5534789/article/details/80102048" target="_blank">【CSS】繪製一個任意角度的扇形</a>，
+ 畫出扇形的方式有很多種，因為上個 Side Project 才剛用過 Canvas ，所以這次想先用 CSS 試排版面看看，再接著實作功能。找了一些圓餅圖之類的關鍵字，剛好搜尋到了這篇，<a href="https://blog.csdn.net/a5534789/article/details/80102048" target="_blank">【CSS】繪製一個任意角度的扇形</a>，
  切版時運用到了 CSS 中的 transform 屬性 : rotate(旋轉)、skewY(傾斜)、transform-origin(設定元素變化的原點)。
  ```html
    <div class="container" style="transform:rotate(-30deg)">
@@ -133,11 +133,11 @@ $n: 6;
 ```
 本來得獎背景也考慮用 for 迴圈製作，但呈現出來的是不規律有時還黏在一起的 icon，於是重新照著設計圖一個一個算位置，for 迴圈改用在亂數產生微動畫，附上只有切版的 <a href="https://codepen.io/liscodecode/pen/qvzrzZ" target="_blank">CodePen</a>。  
 
-  ## 如何抽獎?  
+  ## 如何抽獎呢?  
   
  ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-FINISH.jpg)  
  
-  【綁定資料】切完版後看著畫面開始思考，如何找出畫面中指針和獎品的關聯性。像是 2017 年共有 6 種獎品，平分360°後每一份獎品佔60°，另外旋轉角度分別是60°、120°、180°、240°、300°、360°，將原本試排角度用的 SCSS 移除，把旋轉角度資料使用 Vue.js 新增到原本的獎品項目中，將獎品資料綁訂至畫面和 CSS 屬性上。     
+  【獎品角度用資料綁定呈現】切完版後看著畫面開始思考，如何讓指針旋轉到哪個獎品就會顯示中獎；像是 2017 年設計稿共有 6 種獎品，平分360°後每一份獎品佔60°，另外旋轉角度分別是60°、120°、180°、240°、300°、360°，將原本試排角度用的 SCSS 移除，把旋轉角度資料使用 Vue.js 新增到原本的獎品項目中，將資料綁訂至畫面和 CSS 屬性上。     
   
   原本的獎品格式 :
   ```json
@@ -172,11 +172,7 @@ $n: 6;
 
       // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
       vm.start_deg = degree
-      if (vm.current_year === 2017) {
-        vm.rotate_deg = `rotate(${degree}deg)`
-      } else {
-        vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
-      }
+      vm.current_year === 2017 ? vm.rotate_deg = `rotate(${degree}deg)` : vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
 
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
       ...
