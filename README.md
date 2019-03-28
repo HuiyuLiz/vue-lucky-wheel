@@ -32,7 +32,7 @@
  畫出扇形的方式有很多種，因為上個 Side Project 才剛用過 Canvas ，所以這次想先用 CSS 試排版面看看，再接著實作功能。找了一些圓餅圖之類的關鍵字，剛好搜尋到了這篇，<a href="https://blog.csdn.net/a5534789/article/details/80102048" target="_blank">【CSS】繪製一個任意角度的扇形</a>，
  切版時運用到了 CSS 中的 transform 屬性 : rotate(旋轉)、skewY(傾斜)、transform-origin(設定元素變化的原點)。  
  
- 另外發現了用兩個顏色處理圓餅圖設計的話，如果資料顯示為奇數，第一個跟最後一個扇形會呈現相同顏色，因此設計稿多了Movie的選項(獎品6項)。
+ 另外發現了用兩個顏色處理圓餅圖設計的話，如果資料顯示為奇數，第一個跟最後一個扇形會呈現相同顏色，因此設計稿多了Movie的選項(獎品變成 6 項)。
  ```html
    <div class="container" style="transform:rotate(-30deg)">
     <div class="item item-skew">
@@ -160,7 +160,7 @@ $n: 6;
     "rotate":60
   }]
   ```  
-  【指針旋轉】以 2017 年的 6 項獎品為例，將索引數產生陣列編號 numbers:[0,1,2,3,4,5]，從 numbers 隨機取出數字進行角度運算，指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
+  【指針旋轉】以 2017 年的 6 項獎品為例，將索引數產生陣列編號 numbers : [0,1,2,3,4,5]，從 numbers 隨機取出數字進行角度運算，指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
   ```vue.js
       ...
       // 取出 0-6之間隨機整數
