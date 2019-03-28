@@ -174,6 +174,8 @@ $n: 6;
 
       // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
       vm.start_deg = degree
+      
+      //綁定到指針的旋轉角度
       vm.current_year === 2017 ? vm.rotate_deg = `rotate(${degree}deg)` : vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
 
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
@@ -189,8 +191,8 @@ $n: 6;
       }, vm.duration);
       ... 
       let prize = vm.prizes[vm.index]
-      vm.prize_name = prize.name //背景得獎獎品名稱
-      vm.prize_icon = prize.icon //背景得獎獎品icon
+      vm.prize_name = prize.name //背景得獎名稱
+      vm.prize_icon = prize.icon //背景得獎icon
       ...
   ```        
       
