@@ -219,11 +219,7 @@ let app = new Vue({
 
       // 將初始角度 start_deg:0度 = 旋轉後的角度 degree，下次執行從當下角度開始
       vm.start_deg = degree
-      if (vm.current_year === 2017) {
-        vm.rotate_deg = `rotate(${degree}deg)`
-      } else {
-        vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
-      }
+      vm.current_year === 2017 ? vm.rotate_deg = `rotate(${degree}deg)` : vm.rotate_deg = `rotate(${degree - vm.each_deg / 2}deg)`
 
       vm.prize_transition = `all ${vm.duration / 1000}s cubic-bezier(0.42, 0, 0.2, 0.91)`
       vm.time_remaining--
@@ -232,17 +228,12 @@ let app = new Vue({
       // 取當下開始角度的餘數，與輪盤角度比對(除錯用)
       let remainder = vm.start_deg % 360
       if (remainder <= 0) {
-        vm.current_deg = remainder + 360  // 為了不產生負數，加360
-        if (vm.current_year === 2018) {
-          vm.current_deg = remainder + 360 - vm.each_deg / 2
-        }
+        // 為了不產生負數或0，加360
+        vm.current_year === 2017 ? vm.current_deg = remainder + 360 : remainder + 360 - vm.each_deg / 2
       } else if (remainder > 0) {
-        vm.current_deg = remainder
-        if (vm.current_year === 2018) {
-          vm.current_deg = remainder - vm.each_deg / 2
-        }
+        vm.current_year === 2017 ? vm.current_deg = remainder : vm.current_deg = remainder - vm.each_deg / 2
       }
-      console.log('2.執行旋轉', degree, '指針旋轉:', 'vm.current_deg', vm.current_deg, 'vm.index', vm.index)
+      console.log('2.執行旋轉', degree, 'index', vm.index)
 
       // 將vm.index設為抽中獎品索引數，獎品抽完的索引數將不再出現，直到獎品全數抽完，重新 RESET
       let prize = vm.prizes[vm.index]
@@ -254,8 +245,8 @@ let app = new Vue({
       vm.prizeActive()
       setTimeout(() => {
         prize.count--
+        console.log('3.旋轉角度:', vm.current_deg, '獎品:', prize.name, '獎品角度:', prize.rotate, '剩餘數量:', prize.count, ' index', vm.index)
       }, vm.duration);
-      console.log('3.旋轉角度:', vm.current_deg, '獎品:', prize.name, '獎品角度:', prize.rotate, '剩餘數量:', prize.count, ' vm.index', vm.index)
 
       // 點選動畫結束後，將"已點選"改回"未點選"
       setTimeout(() => {
