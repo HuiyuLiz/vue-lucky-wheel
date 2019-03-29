@@ -141,34 +141,8 @@ $n: 6;
  
  切完版後看著畫面開始思考，該如何讓指針旋轉到哪個獎品就會顯示中獎資訊呢?以 2017 年的 6 項獎品為例，將索引數產生陣列[0,1,2,3,4,5]，從陣列中隨機挑選的數字，指定為抽中獎品的 index，獎品抽完的數字將不再出現，直到全數抽完，轉盤重新 Reset。  
  
-  【獎品角度】以 2017 來說，6 份獎品平分360°後每一份佔60°，旋轉角度分別是60°、120°、180°、240°、300°、360°，移除原本試算角度用的 SCSS ，把旋轉角度資料使用 Vue.js 新增到原本的獎品項目中，將資料綁訂至畫面和 CSS 屬性上。     
+  【轉盤畫面】將資料用 Vue.js 綁訂至畫面上，用 computed 判斷畫面 class。     
   
-  原本的獎品格式 :
-  ```json
-  [{
-    "name": "Wish",
-    "icon": "cake",
-    "count": 5
-  }]
-  ```
- 
-  更新後的獎品格式 :  
-    
-  ```json
-  [{
-    "name": "Wish",
-    "icon": "cake",
-    "count": 5,
-    "rotate":60
-  }]
-  ```  
-  綁定資料 : 
-  
-  ```html
-  <div v-for="(item,index) in prizes" :key="item.name" ref="item"
-       :style="{transform:`rotate(${item.rotate}deg) skewY(-${skewY}deg)`}" class="item">
-   ...
-  ```
   【指針角度】指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
   ```vue.js
       ...
@@ -179,6 +153,8 @@ $n: 6;
       // 預先旋轉四圈
       let circle = 4
       let degree
+      
+      //以 2017 來說，6 份獎品平分360°後每一份佔60°，旋轉角度分別是60°、120°、180°、240°、300°、360°
       //degree=初始角度 + 旋轉4圈 + 獎品旋轉角度[隨機數] - 餘數
       degree = vm.start_deg + circle * 360 + vm.prize_rotate[vm.index] - vm.start_deg % 360
 
@@ -195,7 +171,7 @@ $n: 6;
       ...
       //等指針旋轉過後才顯示中獎
       setTimeout(() => {
-        vm.$refs.item[vm.index].classList.value = "item active"
+        vm.$refs.item[vm.index].classList.value = `${vm.itemClass} active`
       }, vm.duration);
       ... 
       let prize = vm.prizes[vm.index]
