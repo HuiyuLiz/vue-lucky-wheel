@@ -38,15 +38,14 @@
         </div>
       </div>
       <!-- lucky wheel -->
-      <div class="container" :style="{transform:`rotate(${container_deg}deg)`}">
-        <div v-for="(item,index) in prizes" :key="item.name" ref="item"
-          :style="{transform:`rotate(${item.rotate}deg) skewY(-${skewY}deg)`}" class="item">
-          <div :class="[{'item-content':true},{'item-content-large':current_year===2018}]">
+      <div :class="containerClass">
+        <div v-for="(item,index) in prizes" :key="item.name" ref="item" :class="itemClass">
+          <div :class="contentClass">
             <i class="material-icons">
               {{item.icon}}
             </i>
             <span>{{item.name}}
-              <span :class="[{'count':true}, {'count-large':current_year===2018}]">{{item.count}}</span>
+              <span :class="countClass">{{item.count}}</span>
             </span>
           </div>
         </div>
@@ -71,16 +70,11 @@
         </div>
       </transition>
     </div>
-
   </div>
-
-
   </div>
-
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
   <script src="./all.js"></script>
-
 </body>
 
 </html>

@@ -165,15 +165,11 @@ button:focus {
     border-radius: 520px;
     overflow: hidden;
     position: relative;
-  }
+    transform: rotate(-30deg);
 
-  .container-twenty {
-    display: block;
-    width: 520px;
-    height: 520px;
-    border-radius: 520px;
-    overflow: hidden;
-    position: relative;
+    &.container-large {
+      transform: rotate(-18deg);
+    }
   }
 }
 
@@ -229,6 +225,27 @@ button:focus {
   align-items: center;
 }
 
+//$n:輪盤數量；$deg每個項目角度
+$n: 6;
+
+@for $i from 1 through $n {
+  $deg: 360deg / $n;
+
+  .item-skew:nth-child(#{$i}) {
+    transform: rotate($deg * $i) skewY($deg - 90);
+  }
+}
+
+$num: 20;
+
+@for $i from 1 through $num {
+  $deg: 360deg / $num;
+
+  .item-skew-large:nth-child(#{$i}) {
+    transform: rotate($deg * $i) skewY($deg - 90);
+  }
+}
+
 .item-content {
   display: flex;
   width: 100px;
@@ -261,16 +278,17 @@ button:focus {
     line-height: 25px;
     border-radius: 30px;
     display: block;
+
+    &.count-large {
+      left: 39px;
+      top: 40px;
+      font-size: 1rem;
+      width: 25px;
+      line-height: 25px;
+      border-radius: 25px;
+    }
   }
 
-  .count-large {
-    left: 39px;
-    top: 40px;
-    font-size: 1rem;
-    width: 25px;
-    line-height: 25px;
-    border-radius: 25px;
-  }
   > i {
     font-size: 4rem;
   }
