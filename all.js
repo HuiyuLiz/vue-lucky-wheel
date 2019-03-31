@@ -215,7 +215,8 @@
         let remainder = vm.start_deg % 360
         if (remainder <= 0) {
           // 為了不產生負數或0，加360
-          vm.current_year === 2017 ? vm.current_deg = remainder + 360 : remainder + 360 - vm.each_deg / 2
+          vm.current_year === 2017 ? vm.current_deg = remainder + 360 : vm.current_deg = remainder + 360 - vm.each_deg / 2
+
         } else if (remainder > 0) {
           vm.current_year === 2017 ? vm.current_deg = remainder : vm.current_deg = remainder - vm.each_deg / 2
         }
