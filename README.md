@@ -133,7 +133,7 @@ $n: 6;
           transform: rotate(240deg) skewY(-30deg);
 ...          
 ```
-本來得獎背景也考慮用 for 迴圈製作，但呈現出來的視覺有點失控，重新照著設計圖一個一個算位置，for 迴圈改用在亂數產生微動畫，附上只有切版的 <a href="https://codepen.io/liscodecode/pen/qvzrzZ" target="_blank">CodePen</a>。  
+本來中獎 icon 背景也考慮用 for 迴圈隨機排版，但呈現出來的視覺效果有點失控，重新照著設計圖一個一個算位置，for 迴圈改用在亂數產生微動畫，附上只有切版的 <a href="https://codepen.io/liscodecode/pen/qvzrzZ" target="_blank">CodePen</a>。  
 
   ## 如何抽獎呢?  
   
@@ -146,7 +146,7 @@ $n: 6;
   【指針角度】指針旋轉動畫用 CSS 的 transition 控制，畫面重設時移除 transition ，避免會產生指針倒轉的情形，角度計算方法如下。
   ```vue.js
       ...
-      // 取出 0-5 之間隨機整數
+      // 從陣列numbers [0,1,2,3,4,5] 中取出 0-5 之間隨機整數
       vm.index = vm.numbers[Math.floor(Math.random() * vm.numbers.length)]
       console.log('1.剩餘牌號', vm.numbers)
 
