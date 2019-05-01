@@ -12,6 +12,10 @@ $duration: 3s;
   padding: 0;
 }
 
+[v-cloak] {
+  display: none !important;
+}
+
 #app {
   display: flex;
   justify-content: center;

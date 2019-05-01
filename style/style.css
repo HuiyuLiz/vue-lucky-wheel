@@ -7,6 +7,10 @@
   padding: 0;
 }
 
+[v-cloak] {
+  display: none !important;
+}
+
 #app {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -738,36 +742,36 @@ button:focus {
 
 @-webkit-keyframes move {
   10% {
-    -webkit-transform: rotate(8deg) scale(0.8);
-            transform: rotate(8deg) scale(0.8);
-  }
-  20% {
-    -webkit-transform: rotate(5deg) scale(0.8);
-            transform: rotate(5deg) scale(0.8);
-  }
-  30% {
     -webkit-transform: rotate(10deg) scale(0.8);
             transform: rotate(10deg) scale(0.8);
   }
-  40% {
-    -webkit-transform: rotate(2deg) scale(0.8);
-            transform: rotate(2deg) scale(0.8);
+  20% {
+    -webkit-transform: rotate(10deg) scale(0.8);
+            transform: rotate(10deg) scale(0.8);
   }
-  50% {
-    -webkit-transform: rotate(2deg) scale(0.8);
-            transform: rotate(2deg) scale(0.8);
-  }
-  60% {
+  30% {
     -webkit-transform: rotate(1deg) scale(0.8);
             transform: rotate(1deg) scale(0.8);
   }
-  70% {
+  40% {
+    -webkit-transform: rotate(10deg) scale(0.8);
+            transform: rotate(10deg) scale(0.8);
+  }
+  50% {
+    -webkit-transform: rotate(3deg) scale(0.8);
+            transform: rotate(3deg) scale(0.8);
+  }
+  60% {
     -webkit-transform: rotate(6deg) scale(0.8);
             transform: rotate(6deg) scale(0.8);
   }
+  70% {
+    -webkit-transform: rotate(3deg) scale(0.8);
+            transform: rotate(3deg) scale(0.8);
+  }
   80% {
-    -webkit-transform: rotate(5deg) scale(0.8);
-            transform: rotate(5deg) scale(0.8);
+    -webkit-transform: rotate(1deg) scale(0.8);
+            transform: rotate(1deg) scale(0.8);
   }
   90% {
     -webkit-transform: rotate(10deg) scale(0.8);
@@ -777,36 +781,36 @@ button:focus {
 
 @keyframes move {
   10% {
-    -webkit-transform: rotate(8deg) scale(0.8);
-            transform: rotate(8deg) scale(0.8);
-  }
-  20% {
-    -webkit-transform: rotate(5deg) scale(0.8);
-            transform: rotate(5deg) scale(0.8);
-  }
-  30% {
     -webkit-transform: rotate(10deg) scale(0.8);
             transform: rotate(10deg) scale(0.8);
   }
-  40% {
-    -webkit-transform: rotate(2deg) scale(0.8);
-            transform: rotate(2deg) scale(0.8);
+  20% {
+    -webkit-transform: rotate(10deg) scale(0.8);
+            transform: rotate(10deg) scale(0.8);
   }
-  50% {
-    -webkit-transform: rotate(2deg) scale(0.8);
-            transform: rotate(2deg) scale(0.8);
-  }
-  60% {
+  30% {
     -webkit-transform: rotate(1deg) scale(0.8);
             transform: rotate(1deg) scale(0.8);
   }
-  70% {
+  40% {
+    -webkit-transform: rotate(10deg) scale(0.8);
+            transform: rotate(10deg) scale(0.8);
+  }
+  50% {
+    -webkit-transform: rotate(3deg) scale(0.8);
+            transform: rotate(3deg) scale(0.8);
+  }
+  60% {
     -webkit-transform: rotate(6deg) scale(0.8);
             transform: rotate(6deg) scale(0.8);
   }
+  70% {
+    -webkit-transform: rotate(3deg) scale(0.8);
+            transform: rotate(3deg) scale(0.8);
+  }
   80% {
-    -webkit-transform: rotate(5deg) scale(0.8);
-            transform: rotate(5deg) scale(0.8);
+    -webkit-transform: rotate(1deg) scale(0.8);
+            transform: rotate(1deg) scale(0.8);
   }
   90% {
     -webkit-transform: rotate(10deg) scale(0.8);
