@@ -1,4 +1,4 @@
-# Vue Lucky Wheel
+# Vue.js Lucky Wheel
  ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-START.jpg)  
  
  抽獎轉盤
