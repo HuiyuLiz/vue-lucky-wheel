@@ -1,11 +1,11 @@
-# JavaScript 題目篇 - 新手 JS 地下城
+# Vue Lucky Wheel
  ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-START.jpg)  
  
- 9F - 抽獎轉盤
+ 抽獎轉盤
  <a href="https://huiyuliz.github.io/vue-lucky-wheel/" target="_blank">Demo</a>。
 
  ## 特定技術 遊戲規則
- 【特定技術】2017 遊戲輪盤規則，樣式請參考 <a href="https://xd.adobe.com/spec/e7136641-75fd-4359-5960-f092bdfaa633-9122/screen/f8b361e2-e81f-45a1-8465-e21963362b05/before/" target="_blank">Adobe XD 設計稿</a>
+ 【特定技術】2017 遊戲輪盤規則
 
 |禮物|Flight|Child|Anything|Wifi|Wish|
 |:-:|:-:|:-:|:-:|:-:|:-:|
@@ -32,7 +32,7 @@
  畫出扇形的方式有很多種，因為上個 Side Project 才剛用過 Canvas ，所以這次想先用 CSS 試排版面看看，再接著實作功能。找了一些圓餅圖之類的關鍵字，剛好搜尋到了這篇，<a href="https://blog.csdn.net/a5534789/article/details/80102048" target="_blank">【CSS】繪製一個任意角度的扇形</a>，
  切版時運用到了 CSS 中的 transform 屬性 : rotate(旋轉)、skewY(傾斜)、transform-origin(設定元素變化的原點)。  
  
- 另外發現了用兩個顏色處理圓餅圖設計的話，如果資料顯示為奇數，第一個跟最後一個扇形會呈現相同顏色，因此設計稿多了Movie的選項(獎品變成 6 項)。
+ 另外假設使用兩個顏色處理圓餅圖設計的話，若資料顯示為奇數，第一個跟最後一個扇形會呈現相同顏色，因此設計稿自訂義多了 Movie 的選項(獎品改成 6 項)。
  ```html
    <div class="container" style="transform:rotate(-30deg)">
     <div class="item item-skew">
@@ -99,7 +99,7 @@
  ```
   ## 運用SCSS 中的 @for 算出各個角度
   
-  用 CSS 只能一個一個計算角度，邊按計算機邊算到一半的時候，想到可以用 SCSS 的 for 迴圈處理。
+  採用 SCSS 的 for 迴圈處理。
 
 ```scss
 //$n:輪盤數量；$deg每個項目角度
@@ -133,7 +133,7 @@ $n: 6;
           transform: rotate(240deg) skewY(-30deg);
 ...          
 ```
-本來中獎 icon 背景也考慮用 for 迴圈隨機排版，但呈現出來的視覺效果有點失控，重新照著設計圖一個一個算位置，for 迴圈改用在亂數產生微動畫。  
+中獎 icon 背景使用 for 迴圈用在亂數產生微動畫。  
 
   ## 如何抽獎呢?  
   
