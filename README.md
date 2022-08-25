@@ -185,10 +185,11 @@ $n: 6;
 
 
   ## 參考資料 
-  <a href="https://github.com/landluck/lucky_wheel" target="_blank">vue js 幸運大轉盤</a>。  
-  <a href="https://www.bilibili.com/video/av18751303/?spm_id_from=333.788.videocard.6" target="_blank">商城必備技術之轉盤抽獎系統(程式90:00開始，使用jQuery)</a>。  
+  <a href="https://xd.adobe.com/spec/e7136641-75fd-4359-5960-f092bdfaa633-9122/screen/f8b361e2-e81f-45a1-8465-e21963362b05/" target="_blank">Adobe XD 設計稿</a>  
+  <a href="https://github.com/landluck/lucky_wheel" target="_blank">vue js 幸運大轉盤</a>  
+  <a href="https://www.bilibili.com/video/av18751303/?spm_id_from=333.788.videocard.6" target="_blank">商城必備技術之轉盤抽獎系統(程式90:00開始，使用jQuery)</a>  
   <a href="https://pjchender.blogspot.com/2017/05/vue-vue-reactivity.html" target="_blank">[那些關於 Vue 的小細節 ] 為什麼畫面沒有隨資料更新 - Vue 響應式原理（Reactivity）
-</a>。      
+</a>      
   
   
 
