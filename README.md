@@ -29,7 +29,7 @@
  
  ## 預先練習 - 使用 CSS 畫出扇形 
   ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-CSS.jpg)  
- 畫出扇形的方式有很多種，因為上個 Side Project 才剛用過 Canvas ，所以這次想先用 CSS 試排版面看看，再接著實作功能。找了一些圓餅圖之類的關鍵字，剛好搜尋到了這篇，<a href="https://blog.csdn.net/a5534789/article/details/80102048" target="_blank">【CSS】繪製一個任意角度的扇形</a>，
+ 引用這篇<a href="https://blog.csdn.net/a5534789/article/details/80102048" target="_blank">【CSS】繪製一個任意角度的扇形</a>，
  切版時運用到了 CSS 中的 transform 屬性 : rotate(旋轉)、skewY(傾斜)、transform-origin(設定元素變化的原點)。  
  
  另外假設使用兩個顏色處理圓餅圖設計的話，若資料顯示為奇數，第一個跟最後一個扇形會呈現相同顏色，因此設計稿自訂義多了 Movie 的選項(獎品改成 6 項)。
@@ -139,7 +139,7 @@ $n: 6;
   
  ![image]( https://github.com/HuiyuLiz/vue-lucky-wheel/blob/master/jpg/DEMO-FINISH.jpg)  
  
- 切完版後看著畫面開始思考，該如何讓指針旋轉到哪個獎品就會顯示中獎資訊呢?以 2017 年的 6 項獎品為例，將索引數產生陣列[0,1,2,3,4,5]，從陣列中隨機挑選的數字，指定為抽中獎品的 index，獎品抽完的數字將不再出現，直到全數抽完，轉盤重新 Reset。  
+ 以 2017 年的 6 項獎品為例，將索引數產生陣列[0,1,2,3,4,5]，從陣列中隨機挑選的數字，指定為抽中獎品的 index，獎品抽完的數字將不再出現，直到全數抽完，轉盤重新 Reset。  
  
   【轉盤畫面】將資料用 Vue.js 綁訂至畫面上，用 computed 判斷畫面 class。     
   
